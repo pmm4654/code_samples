@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+    body {
+        height: 800px;
+        font-size: 20px;
+    }
+    #cube {
+        background-color: #000;
+        color: white;
+        display: block;
+        float: left;
+        width: 200px;
+        height: 200px;
+        margin: 0 25px;
+        text-align: center;
+        line-height: 200px;
+        background: #000; /* For browsers that do not support gradients */
+        background: -webkit-linear-gradient(#000, #6f6b6b, #000); /* Safari */
+        background: -o-linear-gradient(#000, #6f6b6b, #000); /* Opera 11.6 to 12.0 */
+        background: -moz-linear-gradient(#000, #6f6b6b, #000); /* Firefox 3.6 to 15 */
+        background: linear-gradient(#000, #6f6b6b, #000); /* Standard syntax */
+    }
+
+    #triangle {
+        border-bottom: 120px solid #d30000;
+        border-left: 120px solid transparent;
+        border-right: 120px solid transparent;
+        color: transparent;
+        float: left;
+        height: 0;
+        margin-top: 25%;
+        position: relative;
+        width: 0;
+    }
+
+    #triangle:after {
+        color: white;
+        content: attr(data-attr);
+        display: inline-block;
+        left: -65px;
+        position: absolute;
+        top: 90px;
+        width: 150px;
+    }
+
+    #circle {
+        background-color: green;
+        border-radius: 255px;
+        color: transparent;
+        display: block;
+        float: left;
+        height: 200px;
+        line-height: .8em;
+        margin: 0 25px;
+        margin-top: 10%;
+        position: relative;
+        text-align: center;
+        width: 200px;
+        background: green; /* For browsers that do not support gradients */
+        background: -webkit-radial-gradient(circle, #57c155, #064c06); /* Safari */
+        background: -o-radial-gradient(circle, #57c155, #064c06); /* Opera 11.6 to 12.0 */
+        background: -moz-radial-gradient(circle, #57c155, #064c06); /* Firefox 3.6 to 15 */
+        background: radial-gradient(circle, #57c155, #064c06); /* Standard syntax */
+    }
+
+    #circle:after {
+        position: absolute;
+        color: white;
+        display: inline-block;
+        content: attr(data-attr);
+        width: 120px;
+        top: 85px;
+        left: 41px;
+    }
+    </style>
+
+    <!--[if gte IE 9]>
+      <style type="text/css">
+        #circle,#triangle,#cube {
+           filter: none;
+        }
+      </style>
+    <![endif]-->
+
+  </head>
+  <body>
+    <div id="cube">This is a cube</div>
+    <div id="triangle" data-attr="This is a triangle">This is a triangle</div>
+    <div id="circle" data-attr="This is a big, green circle">This is a big, green circle</div>
+  </body>
+  <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+  <script>
+  var shape = function(selector) {
+      var start = $(selector).css('margin-top');
+      var destination = '';
+      var currentAngle = 1;
+
+      function getSelector() {
+        return selector;
+      }
+
+      function returnToOrigin(mySelector) {
+          $(mySelector).animate(
+              {"margin-top": start},
+              {duration: 815}
+          );
+      }
+
+      function getCurrentAngle() {
+          return currentAngle;
+      }
+
+      function incrementCurrentAngle() {
+          currentAngle++;
+      }
+
+      return {
+          slide: function(distance) {
+              var mySelector = getSelector(); 
+              var options = {
+                  duration: 815,
+                  complete: function() { returnToOrigin(mySelector) }
+              };
+
+              $(mySelector).animate( 
+                  {"margin-top": distance},
+                  options
+              );
+          },
+          rotate: function(degrees) {
+              var finalAngle = degrees;
+              var mySelector = getSelector();
+              var currentAngle = getCurrentAngle();
+              if (finalAngle == currentAngle) {
+                  clearInterval(rotateCircle);
+              }
+              rotation = "rotate(" + currentAngle + "deg)";
+              var rotationString = "-webkit-transform:" + rotation + ";" +
+                  "-moz-transform:" + rotation + ";" +
+                  "-ms-transform:" + rotation + ";" +
+                  "-o-transform:" + rotation + ";"
+              $(mySelector).attr('style', rotationString);
+              incrementCurrentAngle();
+          }
+      };
+  };
+  var cube = shape('#cube');
+  cube.slide('20%');
+
+  var triangle = shape('#triangle');
+  triangle.slide('0%');
+
+
+  var circle = shape('#circle');
+  var degreesToRotate = 360;
+  var intervalPerDegree = 500 / degreesToRotate;
+  var rotateCircle = setInterval(function() {circle.rotate(degreesToRotate)}, intervalPerDegree);
+  </script>
+</html>
