@@ -19,8 +19,5 @@ class PrimeNumbers():
 				return False
 		return True
 
-# a = range(1, 10)
-# [x for x in a if x not in [2, 3, 7]]
-
 prime = PrimeNumbers()
 prime.get_prime_numbers(100)
