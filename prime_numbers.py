@@ -1,10 +1,10 @@
 import math
 class PrimeNumbers():
 	def __init__(self):
-		self.prime_list = []
+		self.prime_list = [2]
 
 	def get_prime_numbers(self, up_to_x):
-		my_list = [x for x in range(2, up_to_x + 1)]
+		my_list = [x for x in range(3, up_to_x + 1, 2)]
 
 		for prime_candidate in my_list:
 			is_prime = self.check_is_prime(prime_candidate)
@@ -18,6 +18,9 @@ class PrimeNumbers():
 			if (check_for_prime % number) == 0:
 				return False
 		return True
+
+# a = range(1, 10)
+# [x for x in a if x not in [2, 3, 7]]
 
 prime = PrimeNumbers()
 prime.get_prime_numbers(100)
