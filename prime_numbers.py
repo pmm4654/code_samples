@@ -4,7 +4,6 @@ import timeit
 class PrimeNumbers():
     def __init__(self):
         self.prime_list = []
-        self.memo = {}
 
     def get_prime_numbers(self, up_to_x):
         my_list = [x for x in range(3, up_to_x + 1, 2)]
@@ -23,6 +22,6 @@ class PrimeNumbers():
         return True
 
 prime = PrimeNumbers()
-print(prime.get_prime_numbers(10))
+print(prime.get_prime_numbers(100))
 
-timeit.timeit('PrimeNumbers().get_prime_numbers(10000)', number = 5, setup='from __main__ import PrimeNumbers')
+print(timeit.timeit('PrimeNumbers().get_prime_numbers(10000)', number = 5, setup='from __main__ import PrimeNumbers'))
