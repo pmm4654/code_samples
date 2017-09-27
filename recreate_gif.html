@@ -83,14 +83,12 @@
         }
       </style>
     <![endif]-->
-
+  <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
   </head>
   <body>
     <div id="cube">This is a cube</div>
     <div id="triangle" data-attr="This is a triangle">This is a triangle</div>
     <div id="circle" data-attr="This is a big, green circle">This is a big, green circle</div>
-  </body>
-  <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
   <script>
   var shape = function(selector) {
       var start = $(selector).css('margin-top');
@@ -158,4 +156,5 @@
   var intervalPerDegree = 500 / degreesToRotate;
   var rotateCircle = setInterval(function() {circle.rotate(degreesToRotate)}, intervalPerDegree);
   </script>
+  </body>
 </html>
